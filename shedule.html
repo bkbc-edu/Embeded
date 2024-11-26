@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Schedule</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: #000000;
+            margin: 20px auto 0;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 50px 0;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: #000000;
+        }
+
+        .event {
+            position: relative;
+            width: calc(50% - 30px);
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .event.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .event:nth-child(odd) {
+            left: 0;
+        }
+
+        .event:nth-child(even) {
+            left: calc(50% + 30px);
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            border-radius: 50%;
+        }
+
+        .event:nth-child(odd)::before {
+            right: -41px;
+        }
+
+        .event:nth-child(even)::before {
+            left: -41px;
+        }
+
+        .event-content {
+            padding: 20px;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .event-content:hover {
+            transform: scale(1.03);
+        }
+
+        .time {
+            position: absolute;
+            top: 20px;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .event:nth-child(odd) .time {
+            right: -140px;
+        }
+
+        .event:nth-child(even) .time {
+            left: -140px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #333333;
+        }
+
+        .cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta a {
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #000000;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease;
+        }
+
+        .cta a:hover::before {
+            left: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .event {
+                width: 100%;
+                left: 0 !important;
+                margin-bottom: 30px;
+            }
+
+            .event::before {
+                left: -9px !important;
+            }
+
+            .event:nth-child(odd)::before {
+                right: auto;
+            }
+
+            .time {
+                position: relative;
+                top: 0;
+                left: 0 !important;
+                right: auto !important;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+
+            .event-content {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+            .cta a {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hackathon Schedule</h1>
+        <div class="timeline">
+            <div class="event">
+                <div class="time">9:00 AM</div>
+                <div class="event-content">
+                    <h2>Welcome & Inauguration</h2>
+                    <p>Kick off the event with a warm welcome from the organizers and an overview of the hackathon.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">10:00 AM</div>
+                <div class="event-content">
+                    <h2>Idea Submission</h2>
+                    <p>Teams brainstorm and submit their project ideas for review and approval.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">11:00 AM</div>
+                <div class="event-content">
+                    <h2>Start Coding</h2>
+                    <p>The coding marathon begins. Participants start developing their clones and enhancements.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">1:00 PM</div>
+                <div class="event-content">
+                    <h2>Lunch Break</h2>
+                    <p>Enjoy a refreshing lunch break and recharge for the second half of the day.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">3:00 PM</div>
+                <div class="event-content">
+                    <h2>Mentor Check-In</h2>
+                    <p>Mentors visit teams to provide guidance, feedback, and technical support.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">6:00 PM</div>
+                <div class="event-content">
+                    <h2>Progress Presentation</h2>
+                    <p>Teams present their progress and receive constructive feedback from judges.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">8:00 PM</div>
+                <div class="event-content">
+                    <h2>Dinner Break</h2>
+                    <p>Relax and refuel with a delicious dinner before continuing the hackathon.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">12:00 AM</div>
+                <div class="event-content">
+                    <h2>Midnight Coding Challenge</h2>
+                    <p>An optional fun challenge to keep the energy high and the creativity flowing.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">8:00 AM</div>
+                <div class="event-content">
+                    <h2>Breakfast</h2>
+                    <p>Start the day with a healthy breakfast to prepare for the final stretch.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">10:00 AM</div>
+                <div class="event-content">
+                    <h2>Submission Deadline</h2>
+                    <p>All teams must upload their projects to GitHub and submit the link for evaluation.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">11:00 AM</div>
+                <div class="event-content">
+                    <h2>Final Presentations</h2>
+                    <p>Teams present their projects to the judges, highlighting features, innovations, and learnings.</p>
+                </div>
+            </div>
+            <div class="event">
+                <div class="time">1:00 PM</div>
+                <div class="event-content">
+                    <h2>Closing Ceremony & Awards</h2>
+                    <p>Winners are announced, and awards are distributed. Thank you for participating!</p>
+                </div>
+            </div>
+        </div>
+        <div class="cta">
+            <a href="https://forms.gle/13MnUzrTBMToe5pQA" target="_blank">Register Now</a>
+            <a href="index.html" target="_blank">Home</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const events = document.querySelectorAll('.event');
+
+            const isInViewport = (el) => {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            };
+
+            const showVisibleEvents = () => {
+                events.forEach(event => {
+                    if (isInViewport(event)) {
+                        event.classList.add('visible');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', showVisibleEvents);
+            window.addEventListener('resize', showVisibleEvents);
+            showVisibleEvents();
+        });
+    </script>
+</body>
+</html>
